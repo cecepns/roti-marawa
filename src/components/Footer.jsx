@@ -54,7 +54,7 @@ const Footer = () => {
         </div>
 
         <div className="border-t border-primary-700 mt-8 pt-8 text-center">
-          <p className="text-cream-200">&copy; 2024 Roti Marawa. All rights reserved.</p>
+          <p className="text-cream-200">&copy; 2025 Roti Marawa. All rights reserved.</p>
         </div>
       </div>
     </footer>
