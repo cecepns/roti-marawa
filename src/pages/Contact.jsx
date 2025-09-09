@@ -204,9 +204,7 @@ const Contact = () => {
                   <div>
                     <h3 className="font-semibold text-primary-800 mb-2">Jam Operasional</h3>
                     <div className="text-gray-600 space-y-1">
-                      <p>Senin - Jumat: 06:00 - 21:00</p>
-                      <p>Sabtu: 06:00 - 22:00</p>
-                      <p>Minggu: 07:00 - 20:00</p>
+                      <p>7.30- 22.00 WITA</p>
                     </div>
                   </div>
                 </div>

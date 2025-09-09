@@ -1,3 +1,5 @@
+import Logo from '../assets/logo.jpg';
+
 const About = () => {
 
   return (
@@ -23,7 +25,7 @@ const About = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div data-aos="fade-right">
               <img
-                src="https://images.pexels.com/photos/4109743/pexels-photo-4109743.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={Logo}
                 alt="Pembuat roti tradisional"
                 className="rounded-2xl shadow-2xl w-full"
               />
@@ -160,23 +162,23 @@ const About = () => {
       {/* Stats Section */}
       <section className="py-20 bg-primary-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 text-center">
             <div data-aos="fade-up" data-aos-delay="0">
-              <div className="text-4xl font-bold text-white mb-2">39+</div>
+              <div className="text-4xl font-bold text-white mb-2">4+</div>
               <div className="text-cream-100">Tahun Pengalaman</div>
             </div>
             <div data-aos="fade-up" data-aos-delay="200">
-              <div className="text-4xl font-bold text-white mb-2">50K+</div>
+              <div className="text-4xl font-bold text-white mb-2">1K+</div>
               <div className="text-cream-100">Pelanggan Puas</div>
             </div>
             <div data-aos="fade-up" data-aos-delay="400">
-              <div className="text-4xl font-bold text-white mb-2">100+</div>
+              <div className="text-4xl font-bold text-white mb-2">10+</div>
               <div className="text-cream-100">Varian Produk</div>
             </div>
-            <div data-aos="fade-up" data-aos-delay="600">
+            {/* <div data-aos="fade-up" data-aos-delay="600">
               <div className="text-4xl font-bold text-white mb-2">25</div>
               <div className="text-cream-100">Cabang Toko</div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
