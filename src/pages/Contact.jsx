@@ -272,6 +272,20 @@ const Contact = () => {
                   </div>
                 )}
 
+                {!!settings.instagram && (
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-xl">📷</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary-800 mb-2">
+                        Instagram
+                      </h3>
+                      <p className="text-gray-600">{settings.instagram}</p>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-xl">🕒</span>
