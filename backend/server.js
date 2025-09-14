@@ -94,7 +94,8 @@ async function insertDefaultSettings() {
     ['phone', '+62 123 456 789'],
     ['address', 'Jl. Roti Manis No. 123, Jakarta'],
     ['instagram', '@rotimarawa'],
-    ['about_us', 'Roti Marawa adalah toko roti yang telah berdiri sejak 1985...']
+    ['about_us', 'Roti Marawa adalah toko roti yang telah berdiri sejak 1985...'],
+    ['operating_hours', '7.30 - 22.00 WITA']
   ];
 
   for (const [key, value] of defaultSettings) {

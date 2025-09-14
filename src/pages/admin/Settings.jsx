@@ -9,7 +9,8 @@ const Settings = () => {
     phone: '',
     address: '',
     instagram: '',
-    about_us: ''
+    about_us: '',
+    operating_hours: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -137,6 +138,21 @@ const Settings = () => {
                     placeholder="@rotimarawa"
                   />
                 </div>
+
+                <div>
+                  <label htmlFor="operating_hours" className="block text-sm font-medium text-gray-700 mb-2">
+                    Jam Operasional
+                  </label>
+                  <input
+                    type="text"
+                    id="operating_hours"
+                    name="operating_hours"
+                    value={settings.operating_hours}
+                    onChange={handleChange}
+                    className="form-input"
+                    placeholder="7.30 - 22.00 WITA"
+                  />
+                </div>
               </div>
 
               <div className="mt-6">
@@ -223,6 +239,11 @@ const Settings = () => {
               <div>
                 <h3 className="font-semibold text-gray-700">Instagram</h3>
                 <p className="text-gray-900">{settings.instagram || 'Belum diatur'}</p>
+              </div>
+
+              <div>
+                <h3 className="font-semibold text-gray-700">Jam Operasional</h3>
+                <p className="text-gray-900">{settings.operating_hours || 'Belum diatur'}</p>
               </div>
             </div>
 
