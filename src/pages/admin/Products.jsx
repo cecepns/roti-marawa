@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import AdminLayout from '../../components/AdminLayout';
@@ -28,12 +28,7 @@ const Products = () => {
     in_stock: true
   });
 
-  useEffect(() => {
-    fetchProducts();
-    fetchCategories();
-  }, [pagination.currentPage]);
-
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -54,16 +49,21 @@ const Products = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [pagination.currentPage, pagination.itemsPerPage]);
 
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       const response = await apiService.get('/categories');
       setCategories(response.data || []);
     } catch (error) {
       console.error('Error fetching categories:', error);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchProducts();
+    fetchCategories();
+  }, [fetchProducts, fetchCategories]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -83,9 +83,9 @@ const Products = () => {
 
     try {
       if (editingProduct) {
-        await apiService.upload(`/products/${editingProduct.id}`, formDataObj);
+        await apiService.upload(`/products/${editingProduct.id}`, formDataObj, 'PUT');
       } else {
-        await apiService.upload('/products', formDataObj);
+        await apiService.upload('/products', formDataObj, 'POST');
       }
       
       resetForm();

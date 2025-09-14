@@ -55,10 +55,10 @@ export const apiService = {
     }
   },
 
-  upload: async (endpoint, formData) => {
+  upload: async (endpoint, formData, method = 'POST') => {
     try {
       const response = await fetch(`${BASE_URL}${endpoint}`, {
-        method: 'POST',
+        method: method,
         body: formData,
       });
       return await response.json();

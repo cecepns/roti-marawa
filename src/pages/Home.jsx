@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { apiService } from "../utils/api";
+import bannerImage from "../assets/banner.jpeg";
 
 const Home = () => {
   const [featuredProducts, setFeaturedProducts] = useState([]);
@@ -62,17 +63,20 @@ const Home = () => {
       {/* Test AOS Element */}
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-cream-50 to-primary-50">
-        <div className="absolute inset-0 bg-black/10"></div>
+      <section 
+        className="relative min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${bannerImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative z-10 text-center px-4">
           <h1
-            className="text-5xl md:text-7xl font-bold text-primary-800 mb-6"
+            className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-lg"
             data-aos="fade-up"
           >
             Roti Marawa
           </h1>
           <p
-            className="text-xl md:text-2xl text-primary-700 mb-8 max-w-2xl mx-auto"
+            className="text-xl md:text-2xl text-white mb-8 max-w-2xl mx-auto drop-shadow-md"
             data-aos="fade-up"
             data-aos-delay="200"
           >
@@ -96,25 +100,25 @@ const Home = () => {
         {/* Floating bread icons */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div
-            className="absolute top-20 left-10 text-6xl text-primary-200 animate-bounce"
+            className="absolute top-20 left-10 text-6xl text-white/30 animate-bounce drop-shadow-lg"
             style={{ animationDelay: "0s" }}
           >
             🥖
           </div>
           <div
-            className="absolute top-40 right-20 text-4xl text-primary-200 animate-bounce"
+            className="absolute top-40 right-20 text-4xl text-white/30 animate-bounce drop-shadow-lg"
             style={{ animationDelay: "1s" }}
           >
             🥐
           </div>
           <div
-            className="absolute bottom-40 left-20 text-5xl text-primary-200 animate-bounce"
+            className="absolute bottom-40 left-20 text-5xl text-white/30 animate-bounce drop-shadow-lg"
             style={{ animationDelay: "2s" }}
           >
             🍞
           </div>
           <div
-            className="absolute bottom-20 right-10 text-3xl text-primary-200 animate-bounce"
+            className="absolute bottom-20 right-10 text-3xl text-white/30 animate-bounce drop-shadow-lg"
             style={{ animationDelay: "0.5s" }}
           >
             🥯
