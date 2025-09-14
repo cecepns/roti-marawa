@@ -1,6 +1,54 @@
+import { useState, useEffect } from 'react';
 import Logo from '../assets/logo.jpg';
+import apiService from '../utils/api';
 
 const About = () => {
+  const [settings, setSettings] = useState({
+    about_us: '',
+    company_name: ''
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchSettings();
+  }, []);
+
+  const fetchSettings = async () => {
+    try {
+      const response = await apiService.get('/settings');
+      setSettings(prev => ({ ...prev, ...response.data }));
+    } catch (error) {
+      console.error('Error fetching settings:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Default content as fallback
+  const defaultAboutContent = `Roti Marawa dimulai dari sebuah toko kecil di sudut kota dengan misi sederhana: 
+membuat roti terbaik untuk keluarga Indonesia. Pak Marawa, pendiri kami, 
+memulai perjalanan ini dengan resep warisan keluarga yang telah diwariskan 
+dari generasi ke generasi.
+
+Dengan komitmen menggunakan bahan-bahan berkualitas tinggi dan proses pembuatan 
+yang teliti, kami terus berkembang dan kini melayani ribuan keluarga di seluruh 
+Indonesia. Setiap roti yang kami buat adalah hasil dari dedikasi dan passion 
+untuk menghadirkan yang terbaik.
+
+Hingga hari ini, kami tetap mempertahankan nilai-nilai tradisional dalam setiap 
+produk yang kami hasilkan, sambil terus berinovasi untuk memenuhi selera modern 
+tanpa melupakan cita rasa autentik yang menjadi ciri khas Roti Marawa.`;
+
+  const aboutContent = settings.about_us || defaultAboutContent;
+  const companyName = settings.company_name || 'Roti Marawa';
+
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-16 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-16">
@@ -9,11 +57,11 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center" data-aos="fade-up">
             <h1 className="text-4xl md:text-5xl font-bold text-primary-800 mb-6">
-              Tentang Roti Marawa
+              Tentang {companyName}
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Sejak 1985, Roti Marawa telah menjadi bagian dari keluarga Indonesia dengan 
-              menghadirkan roti berkualitas tinggi yang dibuat dengan cinta dan resep turun temurun.
+              Sejak 2022, Roti Marawa telah menjadi bagian dari keluarga Indonesia dengan 
+              menghadirkan roti berkualitas tinggi.
             </p>
           </div>
         </div>
@@ -35,23 +83,11 @@ const About = () => {
                 Cerita Kami
               </h2>
               <div className="space-y-4 text-gray-600 leading-relaxed">
-                <p>
-                  Roti Marawa dimulai dari sebuah toko kecil di sudut kota dengan misi sederhana: 
-                  membuat roti terbaik untuk keluarga Indonesia. Pak Marawa, pendiri kami, 
-                  memulai perjalanan ini dengan resep warisan keluarga yang telah diwariskan 
-                  dari generasi ke generasi.
-                </p>
-                <p>
-                  Dengan komitmen menggunakan bahan-bahan berkualitas tinggi dan proses pembuatan 
-                  yang teliti, kami terus berkembang dan kini melayani ribuan keluarga di seluruh 
-                  Indonesia. Setiap roti yang kami buat adalah hasil dari dedikasi dan passion 
-                  untuk menghadirkan yang terbaik.
-                </p>
-                <p>
-                  Hingga hari ini, kami tetap mempertahankan nilai-nilai tradisional dalam setiap 
-                  produk yang kami hasilkan, sambil terus berinovasi untuk memenuhi selera modern 
-                  tanpa melupakan cita rasa autentik yang menjadi ciri khas Roti Marawa.
-                </p>
+                {aboutContent.split('\n\n').map((paragraph, index) => (
+                  <p key={index}>
+                    {paragraph}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
@@ -192,8 +228,8 @@ const About = () => {
             </h2>
             <div className="max-w-4xl mx-auto bg-cream-50 rounded-2xl p-8">
               <p className="text-lg text-gray-700 leading-relaxed mb-6">
-                "Menghadirkan roti berkualitas tinggi yang tidak hanya memenuhi kebutuhan nutrisi, 
-                tetapi juga memberikan kebahagiaan dalam setiap gigitan untuk keluarga Indonesia."
+                &ldquo;Menghadirkan roti berkualitas tinggi yang tidak hanya memenuhi kebutuhan nutrisi, 
+                tetapi juga memberikan kebahagiaan dalam setiap gigitan untuk keluarga Indonesia.&rdquo;
               </p>
               <p className="text-gray-600">
                 Kami percaya bahwa makanan yang baik adalah fondasi kehidupan yang baik. 

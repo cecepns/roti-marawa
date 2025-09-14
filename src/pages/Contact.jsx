@@ -1,22 +1,22 @@
-import { useState, useEffect } from 'react';
-import apiService from '../utils/api';
+import { useState, useEffect } from "react";
+import apiService from "../utils/api";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
   const [settings, setSettings] = useState({
-    company_name: 'Roti Marawa',
-    email: 'info@rotimarawa.com',
-    phone: '+62 123 456 789',
-    address: 'Jl. Roti Manis No. 123, Jakarta',
-    instagram: '@rotimarawa',
-    about_us: '',
-    operating_hours: '7.30 - 22.00 WITA'
+    company_name: "Roti Marawa",
+    email: "info@rotimarawa.com",
+    phone: "+62 123 456 789",
+    address: "Jl. Roti Manis No. 123, Jakarta",
+    instagram: "@rotimarawa",
+    about_us: "",
+    operating_hours: "7.30 - 22.00 WITA",
   });
   const [loading, setLoading] = useState(true);
 
@@ -26,10 +26,10 @@ const Contact = () => {
 
   const fetchSettings = async () => {
     try {
-      const response = await apiService.get('/settings');
-      setSettings(prev => ({ ...prev, ...response.data }));
+      const response = await apiService.get("/settings");
+      setSettings((prev) => ({ ...prev, ...response.data }));
     } catch (error) {
-      console.error('Error fetching settings:', error);
+      console.error("Error fetching settings:", error);
     } finally {
       setLoading(false);
     }
@@ -37,35 +37,36 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
+
     // Create WhatsApp message
-    const whatsappMessage = `Halo, saya ${formData.name}%0A%0A` +
+    const whatsappMessage =
+      `Halo, saya ${formData.name}%0A%0A` +
       `Subjek: ${formData.subject}%0A` +
       `Email: ${formData.email}%0A` +
-      `Telepon: ${formData.phone || 'Tidak diisi'}%0A%0A` +
+      `Telepon: ${formData.phone || "Tidak diisi"}%0A%0A` +
       `Pesan:%0A${formData.message}`;
-    
+
     // Clean phone number for WhatsApp (remove spaces, +, etc.)
-    const cleanPhone = settings.phone.replace(/[\s+\-()]/g, '');
+    const cleanPhone = settings.phone.replace(/[\s+\-()]/g, "");
     const whatsappUrl = `https://wa.me/${cleanPhone}?text=${whatsappMessage}`;
-    
+
     // Open WhatsApp
-    window.open(whatsappUrl, '_blank');
-    
+    window.open(whatsappUrl, "_blank");
+
     // Reset form
     setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
+      name: "",
+      email: "",
+      phone: "",
+      subject: "",
+      message: "",
     });
   };
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
@@ -87,8 +88,8 @@ const Contact = () => {
               Hubungi Kami
             </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ada pertanyaan atau ingin memesan? Jangan ragu untuk menghubungi kami. 
-              Tim customer service kami siap membantu Anda.
+              Ada pertanyaan atau ingin memesan? Jangan ragu untuk menghubungi
+              kami. Tim customer service kami siap membantu Anda.
             </p>
           </div>
         </div>
@@ -106,14 +107,18 @@ const Contact = () => {
                 <div className="flex items-center space-x-2">
                   <span className="text-green-600 text-xl">💬</span>
                   <p className="text-green-800 text-sm">
-                    Pesan Anda akan dikirim melalui WhatsApp untuk respon yang lebih cepat
+                    Pesan Anda akan dikirim melalui WhatsApp untuk respon yang
+                    lebih cepat
                   </p>
                 </div>
               </div>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Nama Lengkap *
                     </label>
                     <input
@@ -128,7 +133,10 @@ const Contact = () => {
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700 mb-2"
+                    >
                       Nomor Telepon
                     </label>
                     <input
@@ -144,7 +152,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Email *
                   </label>
                   <input
@@ -160,7 +171,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="subject"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Subjek *
                   </label>
                   <select
@@ -181,7 +195,10 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-gray-700 mb-2"
+                  >
                     Pesan *
                   </label>
                   <textarea
@@ -211,16 +228,18 @@ const Contact = () => {
               <h2 className="text-3xl font-bold text-primary-800 mb-6">
                 Informasi Kontak
               </h2>
-              
+
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-xl">📍</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-primary-800 mb-2">Alamat</h3>
+                    <h3 className="font-semibold text-primary-800 mb-2">
+                      Alamat
+                    </h3>
                     <p className="text-gray-600 whitespace-pre-line">
-                      {settings.address || 'Jl. Roti Manis No. 123, Jakarta'}
+                      {settings.address || "Jl. Roti Manis No. 123, Jakarta"}
                     </p>
                   </div>
                 </div>
@@ -230,33 +249,39 @@ const Contact = () => {
                     <span className="text-white text-xl">📞</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-primary-800 mb-2">Telepon</h3>
+                    <h3 className="font-semibold text-primary-800 mb-2">
+                      Telepon
+                    </h3>
                     <p className="text-gray-600">
-                      {settings.phone || '+62 123 456 789'}
+                      {settings.phone || "+62 123 456 789"}
                     </p>
                   </div>
                 </div>
 
-                <div className="flex items-start space-x-4">
-                  <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                    <span className="text-white text-xl">📧</span>
+                {!!settings.email && (
+                  <div className="flex items-start space-x-4">
+                    <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                      <span className="text-white text-xl">📧</span>
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-primary-800 mb-2">
+                        Email
+                      </h3>
+                      <p className="text-gray-600">{settings.email}</p>
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-primary-800 mb-2">Email</h3>
-                    <p className="text-gray-600">
-                      {settings.email || 'info@rotimarawa.com'}
-                    </p>
-                  </div>
-                </div>
+                )}
 
                 <div className="flex items-start space-x-4">
                   <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="text-white text-xl">🕒</span>
                   </div>
                   <div>
-                    <h3 className="font-semibold text-primary-800 mb-2">Jam Operasional</h3>
+                    <h3 className="font-semibold text-primary-800 mb-2">
+                      Jam Operasional
+                    </h3>
                     <div className="text-gray-600 space-y-1">
-                      <p>{settings.operating_hours || '7.30 - 22.00 WITA'}</p>
+                      <p>{settings.operating_hours || "7.30 - 22.00 WITA"}</p>
                     </div>
                   </div>
                 </div>
@@ -264,12 +289,14 @@ const Contact = () => {
 
               {/* Direct WhatsApp Contact */}
               <div className="mt-8">
-                <h3 className="font-semibold text-primary-800 mb-4">Hubungi Langsung</h3>
+                <h3 className="font-semibold text-primary-800 mb-4">
+                  Hubungi Langsung
+                </h3>
                 <button
                   onClick={() => {
-                    const cleanPhone = settings.phone.replace(/[\s+\-()]/g, '');
+                    const cleanPhone = settings.phone.replace(/[\s+\-()]/g, "");
                     const whatsappUrl = `https://wa.me/${cleanPhone}?text=Halo, saya ingin bertanya tentang produk Roti Marawa`;
-                    window.open(whatsappUrl, '_blank');
+                    window.open(whatsappUrl, "_blank");
                   }}
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2"
                 >
